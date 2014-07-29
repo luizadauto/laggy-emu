@@ -1,0 +1,44 @@
+﻿[Rat]
+Name = Rat
+Endurance = 5
+Health = 25
+Attack = 5
+Defence = 5
+Accuracy = 0.50
+Evasion = 0.50
+EXP = 2
+Platinum = 0
+Gold = 0
+Silver = 0
+Copper = 2
+Tokens = 0
+MinJade = 1
+MaxJade = 1
+[Big Rat]
+Name = Big Rat
+Health =7
+Attack =7
+Defence =7
+Accuracy =0.50
+Evasion =0.50
+EXP =3
+Platinum =0
+Gold =0
+Silver =0
+Copper =3
+MinJade =1 
+MaxJade =2
+[]
+Name = 
+Health = 
+Attack = 
+Defence = 
+Accuracy = 0.00
+Evasion = 0.00
+EXP = 
+Platinum = 
+Gold = 
+Silver = 
+Copper = 
+MinJade = 
+MaxJade = 

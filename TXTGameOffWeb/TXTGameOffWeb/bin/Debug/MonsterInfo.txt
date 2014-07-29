@@ -1,0 +1,14 @@
+﻿Name =rat
+Endurance = 5
+Attack = 5
+Defence = 3
+Accuracy = 0.50
+Evasion = 0.50
+EXP = 2
+Platinum = 0
+Gold = 0
+Silver = 0
+Copper = 2
+Tokens = 0
+MinJade = 1
+MaxJade = 1

@@ -1,0 +1,80 @@
+Rat
+Big Rat
+Tarantula
+Boar
+Rabid Dog
+Wolf
+Bear
+Ghost
+Spooky Ghost
+Imp
+Goblin
+Gremlin
+Mutant Lamb
+Zombie
+Skeleton
+Poltergeist
+Hobgoblin
+Orc
+Slime
+Gnoll
+Kobold
+Bandit
+Ogre
+Troll
+Pirate
+Ninja
+Harpy
+Gargoyle
+Vampire
+Ghoul
+Succubus
+Demon
+Witch
+Banshee
+Wraith
+Mountain Lion
+Deranged Psychopath
+Shadowmaster
+Water Elemental
+Earth Elemental
+Air Elemental
+Fire Elemental
+Arachnid
+Lich
+Cyclops
+Golem
+Minotaur
+Manticore
+Kraken
+Basilisk
+Titan
+Balrog
+Gorgon
+Chimera
+Abomination
+Wyvern
+Dragonkin
+Teutonic Knight
+Crusader
+Giant Ant
+Crazed Al
+Treant
+Salamander
+Mandrake
+Cutlist
+High Cutlist
+Berserker
+Hydra
+Hellhound
+Aquabat
+Escaped Convict
+Dropbear
+Monstrosity
+El Chupacabra
+Manbearpig
+Scuzzlebutt
+Supervillain
+Gelatinous Blob
+Mad Scientist
+Flying Spaghetti Monster

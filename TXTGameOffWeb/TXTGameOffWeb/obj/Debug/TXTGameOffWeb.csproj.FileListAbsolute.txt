@@ -1,0 +1,9 @@
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\bin\Debug\TXTGameOffWeb.exe.config
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\bin\Debug\TXTGameOffWeb.exe
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\bin\Debug\TXTGameOffWeb.pdb
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.csprojResolveAssemblyReference.cache
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.Form1.resources
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.Properties.Resources.resources
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.csproj.GenerateResource.Cache
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.exe
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.pdb

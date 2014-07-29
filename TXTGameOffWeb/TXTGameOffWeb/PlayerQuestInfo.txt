@@ -1,0 +1,8 @@
+﻿[Quest]
+Name = Pete107
+QuestID = 1
+QuestType = 0
+NoOfKills = 0
+NoOfMobs = 0
+NoOfDrops = 0
+NoOfItems = 0

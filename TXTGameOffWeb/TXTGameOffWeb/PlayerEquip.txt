@@ -1,0 +1,17 @@
+﻿[Equipment]
+Weapon1 = Wooden Sword0
+Weapon2 = Wooden Dagger0
+Head = Leather0
+Hands = Leather0
+Wrist = Leather0
+Arm = Leader0
+Chest = Leather0
+Legs = Leather0
+Feet = Leather0
+Necklace = NONE
+Ring1 = NONE
+Ring2 = NONE
+Ring3 = NONE
+Ring4 = NONE
+Brace1 = NONE
+Brace2 = NONE
