@@ -25,6 +25,7 @@ namespace TXTGameOffWeb.Objects
         private static int mToken;                            
         private static int mMinJade;        
         private static int mMaxJade;
+        private static int origMobHP;
 
         public string MonsterName
         {
@@ -42,6 +43,12 @@ namespace TXTGameOffWeb.Objects
         {
             get { return mHealth; }
             set { mHealth = value; }
+        }
+
+        public int OrigMonsterHealth
+        {
+            get { return origMobHP; }
+            set { origMobHP = value; }
         }
 
         public int MonsterAttack
@@ -126,6 +133,7 @@ namespace TXTGameOffWeb.Objects
             this.MonsterName = data["Name"];
             this.MonsterEndurance = Convert.ToInt16(data["Endurance"]);
             this.MonsterHealth = this.MonsterEndurance * 5;
+            this.OrigMonsterHealth = this.MonsterHealth;
             this.MonsterAttack = Convert.ToInt16(data["Attack"]);
             this.MonsterDefence = Convert.ToInt16(data["Defence"]);
             this.MonsterAccuracy = float.Parse(data["Accuracy"]);

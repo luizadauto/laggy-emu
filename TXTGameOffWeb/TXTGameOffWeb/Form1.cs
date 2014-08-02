@@ -33,35 +33,30 @@ namespace TXTGameOffWeb
             LoadPlayer();
         }
 
-        public void BattleState()
+        public void BattleState(string recvMsg)
         {
             Battle battle = new Battle();
             Player player = new Player();
             Monster mob = new Monster();
-            sMHPLbl.Text = mob.MonsterHealth.ToString();
+            sMHPLbl.Text = mob.OrigMonsterHealth.ToString();
             sPHPLbl.Text = player.Health.ToString();
             while (battle.BattleEnd == false)
             {
-                if (player.Health >= 1 && mob.MonsterHealth <= 0)
+                if (player.Health >= 0 || mob.MonsterHealth >= 1)
                 {
-                    battle.BattleEnd = true;               
-                }
-                if (player.Health <= 0 && mob.MonsterHealth >= 1)
-                {
-                    battle.BattleEnd = true;
-                }
-                else if (player.Health >= 0 || mob.MonsterHealth >= 1)
-                {
-                    sDefeatLBl.Text = battle.SendMessage;
-                    sDDealtLbl.Text = battle.DamageDealt.ToString();
-                    sDTakenLbl.Text = battle.DamageTaken.ToString();
-                    if (player.Health <= 0)
+                    if (player.Health >= 1 && mob.MonsterHealth <= 0)
                     {
                         battle.BattleEnd = true;
+                        sDefeatLBl.Text = recvMsg;
+                        sDDealtLbl.Text = battle.DamageDealt.ToString();
+                        sDTakenLbl.Text = battle.DamageTaken.ToString();
                     }
-                    if (mob.MonsterHealth <= 0)
+                    if (player.Health <= 0 && mob.MonsterHealth >= 1)
                     {
                         battle.BattleEnd = true;
+                        sDefeatLBl.Text = recvMsg;
+                        sDDealtLbl.Text = battle.DamageDealt.ToString();
+                        sDTakenLbl.Text = battle.DamageTaken.ToString();
                     }
                 }
             }
@@ -158,7 +153,9 @@ namespace TXTGameOffWeb
 
         private void atkMobLbl_Click(object sender, EventArgs e)
         {
+            Player player = new Player();
             StartNewBattle();
+            sPHPLbl.Text = player.OrigPlayerHP.ToString();
         }
 
         private void autoAtkLbl_Click(object sender, EventArgs e)
@@ -211,7 +208,8 @@ namespace TXTGameOffWeb
 
             //[Stats]
             player.Endurance = Convert.ToInt16(data["Endurance"]);
-            player.Health = Convert.ToInt16(data["Health"]);
+            player.Health = player.Endurance * 5;
+            player.OrigPlayerHP = player.Health;
             player.Attack = Convert.ToInt16(data["Attack"]);
             player.Defence = Convert.ToInt16(data["Defence"]);
             player.Accuracy = float.Parse(data["Accuracy"]);
@@ -269,8 +267,6 @@ namespace TXTGameOffWeb
         {
             Player player = new Player();
 
-            int convertHP = player.Endurance * 5;
-
             //Player Info
             sNameLbl.Text = player.Name;
             sLvlLbl.Text = player.Level.ToString();
@@ -282,7 +278,6 @@ namespace TXTGameOffWeb
 
             //Player Stats
             sHealthLbl.Text = player.Endurance.ToString();
-            sPHPLbl.Text = convertHP.ToString();
             sAtkLbl.Text = player.Attack.ToString();
             sDefLbl.Text = player.Defence.ToString();
             sAccLbl.Text = player.Accuracy.ToString();
@@ -420,12 +415,13 @@ namespace TXTGameOffWeb
         public void StartNewBattle()
         {
             Battle battle = new Battle();
+            Player player = new Player();
             Monster mob = new Monster();
             mob.MonsterName = mobBox.Text.ToLower();
             battle.BattleStarted = true;
             mob.GetMonster(mob.MonsterName);
-            battle.BattleResult(mob.MonsterName);            
-            BattleState();
+            battle.BattleResult(mob.MonsterName);
+            BattleState(battle.SendMessage);
         }
     }
 }

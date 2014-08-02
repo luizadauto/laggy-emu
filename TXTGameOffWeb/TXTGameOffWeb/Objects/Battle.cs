@@ -39,42 +39,32 @@ namespace TXTGameOffWeb.Objects
 
         public void BattleResult(string mobName)
         {
-            
-
-
             if (this.BattleStarted == true)
             {
-                if (player.Health <= 0)
+                this.BattleEnd = false;
+                while (player.Health >= 1)
                 {
-                    this.SendMessage = defeatString;
-                    this.BattleEnd = true;
-                    this.BattleStarted = false;
-                    return;
-                }
-                if (mob.MonsterHealth <= 0)
-                {
-                    this.SendMessage = victoryString;
-                    this.BattleEnd = true;
-                    this.BattleStarted = false;
-                    mob.MonsterDestroy();
-                    player.MonstersKilled++;
-                    return;
-                }
-                if (this.BattleStarted == true)
-                {
-                    this.BattleEnd = false;
-                    while (player.Health >= 1)
+                    while (mob.MonsterHealth >= 1)
                     {
-                        while (mob.MonsterHealth >= 1)
-                        {
-                            CalculateDamageTaken();
-                            CalculateDameDealt();
-                        }
+                        CalculateDamageTaken();
+                        CalculateDameDealt();
+                    }
+                    if (mob.MonsterHealth <= 0)
+                    {
+                        this.SendMessage = victoryString;
+                        this.BattleStarted = false;
+                        mob.MonsterDestroy();
+                        player.MonstersKilled++;
                         return;
                     }
                 }
+
+                if (player.Health <= 0)
+                {
+                    this.SendMessage = defeatString;
+                    this.BattleStarted = false;
+                }
             }
-            return;
         }
 
         public void CalculateDamageTaken()
@@ -91,7 +81,6 @@ namespace TXTGameOffWeb.Objects
 
                 DamageTaken = mAttack;
             }
-            return;
         }
 
         public void CalculateDameDealt()
@@ -109,7 +98,6 @@ namespace TXTGameOffWeb.Objects
 
                 DamageDealt = pAttack;
             }
-            return;
         }
 
         public string SendMessage

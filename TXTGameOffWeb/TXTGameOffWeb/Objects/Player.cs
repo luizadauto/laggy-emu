@@ -21,6 +21,7 @@ namespace TXTGameOffWeb.Objects
         // [Stats]
         private static int endurance;
         private static int HP;
+        private static int origPlayerHP;
         private static int attack;
         private static int defence;
         private static float acc;
@@ -120,6 +121,12 @@ namespace TXTGameOffWeb.Objects
         {
             get { return HP; }
             set { HP = value; }
+        }
+
+        public int OrigPlayerHP
+        {
+            get { return origPlayerHP; }
+            set { origPlayerHP = value; }
         }
 
         public int Attack
