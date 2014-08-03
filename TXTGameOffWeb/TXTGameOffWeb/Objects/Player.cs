@@ -363,11 +363,5 @@ namespace TXTGameOffWeb.Objects
         }
 
         #endregion
-
-        public void Load()
-        {
-
-        }
-
     }
 }

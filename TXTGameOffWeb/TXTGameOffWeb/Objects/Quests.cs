@@ -7,13 +7,25 @@ using System.IO;
 
 namespace TXTGameOffWeb.Objects
 {
-    public class Quests : Player
+    public class Quests
     {
+        private static string name;
         private static int questType;
         private static int currentQuestID;
+        private static int noOfKills;
+        private static int noOfMobs;
+        private static int noOfDrops;        
+        private static int noOfItems;
         private static string questString1 = "You have killed a quest monster.";
         private static string questString2 = "You have collected a ";
         private static string questString3 = "You currently do not have a quest";
+
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
         public int QuestType
         {
@@ -25,6 +37,30 @@ namespace TXTGameOffWeb.Objects
         {
             get { return currentQuestID; }
             set { currentQuestID = value; }
+        }
+
+        public int NumberOfKills
+        {
+            get { return noOfKills; }
+            set { noOfKills = value; }
+        }
+
+        public int NumberOfMobs
+        {
+            get { return noOfMobs; }
+            set { noOfMobs = value; }
+        }
+
+        public int NumberOfDrops
+        {
+            get { return noOfDrops; }
+            set { noOfDrops = value; }
+        }
+
+        public int NumberOfItems
+        {
+            get { return noOfItems; }
+            set { noOfItems = value; }
         }
 
         public void QuestSeclector()

@@ -258,14 +258,36 @@ namespace TXTGameOffWeb
 
             data.Clear();
 
+            LoadPlayerQuest();
        
             updateLblTimer.Start();
             updateTimer.Start();
         }
 
+
+        public void LoadPlayerQuest()
+        {
+            Player player = new Player();
+            Quests quest = new Quests();
+
+            var data = File.ReadAllLines("PlayerQuestInfo.txt")
+                .Select(x => x.Split('='))
+                .Where(x => x.Length > 1)
+                .ToDictionary(x => x[0].Trim(), x => x[1]);
+            //[Player]
+            quest.Name = data["Name"];
+            quest.GetCurrentQuest = Convert.ToInt16(data["QuestID"]);
+            quest.QuestType = Convert.ToInt16(data["QuestType"]);
+            quest.NumberOfKills = Convert.ToInt16(data["NoOfKills"]);
+            quest.NumberOfMobs = Convert.ToInt16(data["NoOfMobs"]);
+            quest.NumberOfDrops = Convert.ToInt16(data["NoOfDrops"]);
+            quest.NumberOfItems = Convert.ToInt16(data["NoOfItems"]);
+        }
+
         private void updateLblTimer_Tick(object sender, EventArgs e)
         {
             Player player = new Player();
+            Quests quest = new Quests();
 
             //Player Info
             sNameLbl.Text = player.Name;
@@ -301,7 +323,8 @@ namespace TXTGameOffWeb
             sQNumLbl.Text = player.CurrentQuest.ToString();
             sQuestCompLbl.Text = player.QuestsCompleted.ToString();
             sMobKillsLbl.Text = player.MonstersKilled.ToString();
-            sProgressLbl.Text = player.QuestAmount.ToString() + "/" + player.MaxQuestAmount.ToString() + "(0) to go";
+            int calcToGo = quest.NumberOfMobs - quest.NumberOfKills;
+            sProgressLbl.Text = string.Format("{0}/{1} {2} to go", quest.NumberOfKills.ToString(), quest.NumberOfMobs.ToString(), calcToGo.ToString());
 
             //Equips
             sWeapon1.Text = player.Weapon1;

@@ -29,7 +29,7 @@ Opals =0
 [Quests]
 CurrentQuest =0
 QComplete =0
-Mkills =0
+Mkills =2
 QCount =0
 MaxCount =0
 [Equipment]
