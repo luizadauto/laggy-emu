@@ -8,12 +8,31 @@ namespace TXTGameOffWeb.Objects
 {
     public class Trainer : Player
     {
+        private static int startEXP;
+        private static int[] _expToLevel;
+
+        public int[] ExperienceToLevel
+        {
+            get { return _expToLevel;}
+            set { _expToLevel = value;}
+        }
+
+        public void SetDefaultNeedExp()
+        {
+            int i = 1;
+            while (i <= 100)
+            {
+                i++;
+                startEXP = startEXP + 50;
+                ExperienceToLevel[i] = startEXP;
+            }
+        }
+
         public void TrainStats()
         {
             Player player = new Player();
             int hp, atk, def;
             float eva, acc;
-
             hp = player.Health;
             atk = player.Attack;
             def = player.Defence;
@@ -32,17 +51,15 @@ namespace TXTGameOffWeb.Objects
         public void AddExperience(int giveExp)
         {
             Player player = new Player();
-            int exp = player.Experience;
-            int[] expToLvl = new int[] { 100, 110, 120, 130, 150, 175, 200, 235, 275, 325, 400, 475, 550, 625, 750 };
-            int lvl = player.Level;
+            int currentEXP = player.Experience;
             
-            if (exp >= expToLvl[lvl])
+            for (int i  = 0; i < this.ExperienceToLevel[player.Level]; i++)
             {
-                LevelUp(giveExp, expToLvl[lvl]);                
-            }
-            else
-            {
-                player.Experience = player.Experience + giveExp;
+                currentEXP += giveExp;
+                if (currentEXP == this.ExperienceToLevel[player.Level])
+                {
+                    LevelUp(giveExp, currentEXP);
+                }
             }
         }
 

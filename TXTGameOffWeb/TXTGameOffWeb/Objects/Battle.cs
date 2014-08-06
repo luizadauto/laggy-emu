@@ -33,20 +33,20 @@ namespace TXTGameOffWeb.Objects
         private static int mobCurrentHP;
         private static bool battleEnd;
         private static bool battleStarted;
-
         Player player = new Player();
         Monster mob = new Monster();
 
         public void BattleResult(string mobName)
         {
+            int baseHP = player.Endurance * 5;
             if (this.BattleStarted == true)
             {
                 this.BattleEnd = false;
-                while (player.Health >= 1)
+                while (baseHP >= 1)
                 {
                     while (mob.MonsterHealth >= 1)
                     {
-                        CalculateDamageTaken();
+                        CalculateDamageTaken(baseHP);
                         CalculateDameDealt();
                     }
                     if (mob.MonsterHealth <= 0)
@@ -59,7 +59,7 @@ namespace TXTGameOffWeb.Objects
                     }
                 }
 
-                if (player.Health <= 0)
+                if (baseHP <= 0)
                 {
                     this.SendMessage = defeatString;
                     this.BattleStarted = false;
@@ -67,7 +67,7 @@ namespace TXTGameOffWeb.Objects
             }
         }
 
-        public void CalculateDamageTaken()
+        public void CalculateDamageTaken(int baseHP)
         {
             int mAttack = mob.MonsterAttack;
 
@@ -77,7 +77,7 @@ namespace TXTGameOffWeb.Objects
 
                 dmgTaken = mAttack; //
 
-                player.Health -= mAttack;
+                baseHP -= mAttack;
 
                 DamageTaken = mAttack;
             }

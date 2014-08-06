@@ -17,6 +17,11 @@ namespace TXTGameOffWeb
     {
         private static int auto = 6;
         private static int attacks = 20;
+        Player player = new Player();
+        Monster mob = new Monster();
+        Trainer trainer = new Trainer();
+        Battle battle = new Battle();
+        Quests quest = new Quests();
 
 
         public Form1()
@@ -35,9 +40,6 @@ namespace TXTGameOffWeb
 
         public void BattleState(string recvMsg)
         {
-            Battle battle = new Battle();
-            Player player = new Player();
-            Monster mob = new Monster();
             sMHPLbl.Text = mob.OrigMonsterHealth.ToString();
             sPHPLbl.Text = player.Health.ToString();
             while (battle.BattleEnd == false)
@@ -58,6 +60,13 @@ namespace TXTGameOffWeb
                         sDDealtLbl.Text = battle.DamageDealt.ToString();
                         sDTakenLbl.Text = battle.DamageTaken.ToString();
                     }
+                }
+                else if (mob.Health >= 1 && player.Health <= 0)
+                {
+                    battle.BattleEnd = true;
+                    sDefeatLBl.Text = recvMsg;
+                    sDDealtLbl.Text = battle.DamageDealt.ToString();
+                    sDTakenLbl.Text = battle.DamageTaken.ToString();
                 }
             }
         }
@@ -153,7 +162,6 @@ namespace TXTGameOffWeb
 
         private void atkMobLbl_Click(object sender, EventArgs e)
         {
-            Player player = new Player();
             StartNewBattle();
             sPHPLbl.Text = player.OrigPlayerHP.ToString();
         }
@@ -190,8 +198,6 @@ namespace TXTGameOffWeb
 
         public void LoadPlayer()
         {
-            Player player = new Player();
-            Quests quest = new Quests();
 
             var data = File.ReadAllLines("PlayerInfo.txt")
                 .Select(x => x.Split('='))
@@ -254,8 +260,8 @@ namespace TXTGameOffWeb
             player.Ring3 = data["Ring3"];
             player.Ring4 = data["Ring4"];
             player.Brace1 = data["Brace1"];
-            player.Brace2 = data["Brace2"];           
-
+            player.Brace2 = data["Brace2"];
+            trainer.SetDefaultNeedExp();
             data.Clear();
 
             LoadPlayerQuest();
@@ -267,8 +273,7 @@ namespace TXTGameOffWeb
 
         public void LoadPlayerQuest()
         {
-            Player player = new Player();
-            Quests quest = new Quests();
+            
 
             var data = File.ReadAllLines("PlayerQuestInfo.txt")
                 .Select(x => x.Split('='))
@@ -281,18 +286,16 @@ namespace TXTGameOffWeb
             quest.NumberOfKills = Convert.ToInt16(data["NoOfKills"]);
             quest.NumberOfMobs = Convert.ToInt16(data["NoOfMobs"]);
             quest.NumberOfDrops = Convert.ToInt16(data["NoOfDrops"]);
-            quest.NumberOfItems = Convert.ToInt16(data["NoOfItems"]);
+            quest.NumberOfItems = Convert.ToInt16(data["NoOfItems"]);            
         }
 
         private void updateLblTimer_Tick(object sender, EventArgs e)
         {
-            Player player = new Player();
-            Quests quest = new Quests();
-
+            int xpToLvl = trainer.ExperienceToLevel[player.Level];
             //Player Info
             sNameLbl.Text = player.Name;
             sLvlLbl.Text = player.Level.ToString();
-            sExpLbl.Text = player.Experience.ToString();
+            sExpLbl.Text = string.Format("{0}/{1}", player.Experience.ToString(), xpToLvl.ToString());
             sGuildLbl.Text = player.GuildName;
             sGuildLvlLbl.Text = player.GuildLevel.ToString();
             sRepLbl.Text = player.Rep.ToString();
@@ -347,7 +350,6 @@ namespace TXTGameOffWeb
 
         private void updateTimer_Tick(object sender, EventArgs e)
         {
-            Player player = new Player();
             StreamWriter writer = new StreamWriter("PlayerInfo.txt");
             writer.WriteLine("[Player]");
             writer.WriteLine("Name =" + player.Name);
@@ -416,35 +418,41 @@ namespace TXTGameOffWeb
             {            
                 autoTimer.Stop();
                 attacks = 20;
-            } 
-            else if (auto == -1)                            
-            {                                   
-                auto = 6;                    
+            }
+            else if (auto == -1)
+            {
+                auto = 6;
                 attacks--;
+                StartNewBattle();
                 if (attacks == 0)
                 {
                     attacks = 20;
                     autoTimer.Stop();
                 }
-            }                
-            else                
-            {                    
-                sAutoRemainLbl.Text = attacks.ToString();                    
-                actionTimerLbl.Text = auto.ToString();                    
-                StartNewBattle();                
+            }
+            else
+            {
+                sAutoRemainLbl.Text = attacks.ToString();
+                actionTimerLbl.Text = auto.ToString();
             }
         }
 
         public void StartNewBattle()
         {
-            Battle battle = new Battle();
-            Player player = new Player();
-            Monster mob = new Monster();
             mob.MonsterName = mobBox.Text.ToLower();
             battle.BattleStarted = true;
             mob.GetMonster(mob.MonsterName);
             battle.BattleResult(mob.MonsterName);
             BattleState(battle.SendMessage);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            updateLblTimer.Stop();
+            autoTimer.Stop();
+            updateTimer.Stop();
+            player.Destroy();
+            mob.Destroy();
         }
     }
 }

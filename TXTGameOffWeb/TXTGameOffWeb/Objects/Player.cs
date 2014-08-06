@@ -363,5 +363,56 @@ namespace TXTGameOffWeb.Objects
         }
 
         #endregion
+
+        public void Destroy()
+        {
+            this.Name = "";
+            this.Level = 0;
+            this.Experience = 0;
+            this.GuildName = "";
+            this.GuildLevel = 0;
+            this.Rep = 0;
+            this.Rank = "";
+            // [Stats]
+            this.Endurance = 0;
+            this.Health = 0;
+            this.OrigPlayerHP = 0;
+            this.Attack = 0;
+            this.Defence = 0;
+            this.Accuracy = 0.0f;
+            this.Evasion = 0.0f;
+            // [Currencies]
+            this.Platinum = 0;
+            this.Gold = 0;
+            this.Silver = 0;
+            this.Copper = 0;
+            this.Jade = 0;
+            this.Tokens = 0;
+            this.PrizeTickets = 0;
+            this.Diamonds = 0;
+            this.Sapphires = 0;
+            this.Rubies = 0;
+            this.Emeralds = 0;
+            this.Opals = 0;
+            // [Quests]        
+            this.MonstersKilled = 0;
+            // [Equipment]
+            this.Weapon1 = "";
+            this.Weapon2 = "";
+            this.Head = "";
+            this.Hands = "";
+            this.Wrist = "";
+            this.Arm = "";
+            this.ChestArmor = "";
+            this.Legs = "";
+            this.Feet = "";
+            this.Necklace = "";
+            this.Ring1 = "";
+            this.Ring2 = "";
+            this.Ring3 = "";
+            this.Ring4 = "";
+            this.Brace1 = "";
+            this.Brace2 = "";
+        }
     }
 }
