@@ -2,17 +2,17 @@
 Name =Pete107
 Level =1
 EXP =0
-Guild = NONE
+Guild =NONE
 GuildLvl =0
 Rep =0
-Rank = Peasant
+Rank =Peasant
 [Stats]
-Endurance =10
-Health =50
-Attack =5
+Endurance =5
+Health =25
+Attack =10
 Defence =3
-Accuracy =50
-Evasion =0.5
+Accuracy =5
+Evasion =0.1
 [Currencies]
 Platinum =0
 Gold =0
@@ -29,19 +29,19 @@ Opals =0
 [Quests]
 CurrentQuest =0
 QComplete =0
-Mkills =0
+Mkills =4
 QCount =0
 MaxCount =0
 [Equipment]
-LeftHand = WoodenSword0
-RightHand = WoodenDagger0
-Head = LeatherHat0
-Gloves = LeatherGloves0
-Wrist = LeatherBand0
-Arm = LeatherArmlet0
-Chest = LeatherHide0
-Legs = LeatherLeggings0
-Feet = LeatherBoots0
+LeftHand = Wooden Sword0
+RightHand = Wooden Sword0
+Head = Leather Hat0
+Gloves = Leather Gloves0
+Wrist = Leather Bands0
+Arm = Leather Arms0
+Chest = Leather Chest0
+Legs = Leather Leggins0
+Feet = Leather Boots0
 Necklace = NONE
 Ring1 = NONE
 Ring2 = NONE

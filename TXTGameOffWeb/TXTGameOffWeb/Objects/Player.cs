@@ -364,7 +364,7 @@ namespace TXTGameOffWeb.Objects
 
         #endregion
 
-        public void Destroy()
+        public void PlayerDestroy()
         {
             this.Name = "";
             this.Level = 0;

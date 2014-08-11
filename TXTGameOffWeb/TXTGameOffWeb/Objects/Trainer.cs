@@ -9,12 +9,12 @@ namespace TXTGameOffWeb.Objects
     public class Trainer : Player
     {
         private static int startEXP;
-        private static int[] _expToLevel;
+        private static int expToLevel;
 
-        public int[] ExperienceToLevel
+        public int ExperienceToLevel
         {
-            get { return _expToLevel;}
-            set { _expToLevel = value;}
+            get { return expToLevel;}
+            set { expToLevel = value;}
         }
 
         public void SetDefaultNeedExp()
@@ -24,7 +24,7 @@ namespace TXTGameOffWeb.Objects
             {
                 i++;
                 startEXP = startEXP + 50;
-                ExperienceToLevel[i] = startEXP;
+                ExperienceToLevel = startEXP;
             }
         }
 
@@ -53,10 +53,10 @@ namespace TXTGameOffWeb.Objects
             Player player = new Player();
             int currentEXP = player.Experience;
             
-            for (int i  = 0; i < this.ExperienceToLevel[player.Level]; i++)
+            for (int i  = 0; i < this.ExperienceToLevel; i++)
             {
                 currentEXP += giveExp;
-                if (currentEXP == this.ExperienceToLevel[player.Level])
+                if (currentEXP == this.ExperienceToLevel)
                 {
                     LevelUp(giveExp, currentEXP);
                 }

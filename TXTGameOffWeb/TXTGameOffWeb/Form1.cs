@@ -19,7 +19,6 @@ namespace TXTGameOffWeb
         private static int attacks = 20;
         Player player = new Player();
         Monster mob = new Monster();
-        Trainer trainer = new Trainer();
         Battle battle = new Battle();
         Quests quest = new Quests();
 
@@ -31,6 +30,7 @@ namespace TXTGameOffWeb
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            mob.CurrentMonster = 0;
             bLogPanel.Hide();
             bLogPanel.Visible = false;
             jewelPanel.Hide();
@@ -44,29 +44,28 @@ namespace TXTGameOffWeb
             sPHPLbl.Text = player.Health.ToString();
             while (battle.BattleEnd == false)
             {
-                if (player.Health >= 0 || mob.MonsterHealth >= 1)
+                if (battle.BaseHP >= 1 || battle.MobBaseHP >= 1)
                 {
-                    if (player.Health >= 1 && mob.MonsterHealth <= 0)
+                    if (battle.BaseHP >= 1 && battle.MobBaseHP <= 0)
                     {
                         battle.BattleEnd = true;
-                        sDefeatLBl.Text = recvMsg;
-                        sDDealtLbl.Text = battle.DamageDealt.ToString();
-                        sDTakenLbl.Text = battle.DamageTaken.ToString();
+                        sDefeatLBl.Text = recvMsg + " in " + battle.Rounds.ToString() + " rounds";
+                        sDDealtAvrgLbl.Text = battle.AverageDamageDealt.ToString();
+                        sDDealtLbl.Text = battle.TotalDamageDealt.ToString();
+                        sDTakenAvrgLbl.Text = battle.AverageDamageTaken.ToString();
+                        sDTakenLbl.Text = battle.TotalDamageTaken.ToString();
+                        mob.MonsterDestroy();
                     }
-                    if (player.Health <= 0 && mob.MonsterHealth >= 1)
+                    if (battle.BaseHP <= 0 && battle.MobBaseHP >= 1)
                     {
                         battle.BattleEnd = true;
-                        sDefeatLBl.Text = recvMsg;
-                        sDDealtLbl.Text = battle.DamageDealt.ToString();
-                        sDTakenLbl.Text = battle.DamageTaken.ToString();
+                        sDefeatLBl.Text = recvMsg + " in " + battle.Rounds.ToString() + " rounds";
+                        sDDealtAvrgLbl.Text = battle.AverageDamageDealt.ToString();
+                        sDDealtLbl.Text = battle.TotalDamageDealt.ToString();
+                        sDTakenAvrgLbl.Text = battle.AverageDamageTaken.ToString();
+                        sDTakenLbl.Text = battle.TotalDamageTaken.ToString();
+                        mob.MonsterDestroy();
                     }
-                }
-                else if (mob.Health >= 1 && player.Health <= 0)
-                {
-                    battle.BattleEnd = true;
-                    sDefeatLBl.Text = recvMsg;
-                    sDDealtLbl.Text = battle.DamageDealt.ToString();
-                    sDTakenLbl.Text = battle.DamageTaken.ToString();
                 }
             }
         }
@@ -261,7 +260,7 @@ namespace TXTGameOffWeb
             player.Ring4 = data["Ring4"];
             player.Brace1 = data["Brace1"];
             player.Brace2 = data["Brace2"];
-            trainer.SetDefaultNeedExp();
+//            trainer.SetDefaultNeedExp();
             data.Clear();
 
             LoadPlayerQuest();
@@ -290,12 +289,11 @@ namespace TXTGameOffWeb
         }
 
         private void updateLblTimer_Tick(object sender, EventArgs e)
-        {
-            int xpToLvl = trainer.ExperienceToLevel[player.Level];
+        {            
             //Player Info
             sNameLbl.Text = player.Name;
             sLvlLbl.Text = player.Level.ToString();
-            sExpLbl.Text = string.Format("{0}/{1}", player.Experience.ToString(), xpToLvl.ToString());
+            sExpLbl.Text = string.Format("{0}/##", player.Experience.ToString());
             sGuildLbl.Text = player.GuildName;
             sGuildLvlLbl.Text = player.GuildLevel.ToString();
             sRepLbl.Text = player.Rep.ToString();
@@ -451,8 +449,10 @@ namespace TXTGameOffWeb
             updateLblTimer.Stop();
             autoTimer.Stop();
             updateTimer.Stop();
-            player.Destroy();
-            mob.Destroy();
+            player.PlayerDestroy();
+            mob.MonsterDestroy();
+            battle.BattleDestroy();
+            Application.Exit();
         }
     }
 }

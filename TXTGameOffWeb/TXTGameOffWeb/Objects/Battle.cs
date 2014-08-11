@@ -22,81 +22,118 @@ namespace TXTGameOffWeb.Objects
     {
         private static int damageTaken;
         private static int damageDealt;
+        private static int avrgDmgDealt;
+        private static int avrgDmgTaken;
+
         private static int missTimes;
         private static int dodgeTimes;
         private static int critTimes;
-        private static string victoryString = "You succsesfully defeated the monster.";
-        private static string defeatString = "You failed to defeat the monster.";
+
+        private static string victoryString = "You succsesfully defeated the monster";
+        private static string defeatString = "You failed to defeat the monster";
+
         private static string msg;
+
+        private static int rounds;
         private static int dmgTaken;
         private static int dmgDealt;
-        private static int mobCurrentHP;
+
         private static bool battleEnd;
         private static bool battleStarted;
+
+        private static int baseHP;
+        private static int mobBaseHP;
+
+
         Player player = new Player();
-        Monster mob = new Monster();
 
         public void BattleResult(string mobName)
-        {
-            int baseHP = player.Endurance * 5;
+        {            
+            Monster mob = new Monster();
+
+            BaseHP = player.Endurance * 5;
+            MobBaseHP = mob.MonsterEndurance * 5;
+
+            rounds = 0;
+
+            TotalDamageDealt = 0;
+            TotalDamageTaken = 0;
+
+            AverageDamageDealt = 0;
+            AverageDamageTaken = 0;
+
             if (this.BattleStarted == true)
             {
                 this.BattleEnd = false;
-                while (baseHP >= 1)
+                while (MobBaseHP >= 1 && BaseHP >= 1)
                 {
-                    while (mob.MonsterHealth >= 1)
-                    {
-                        CalculateDamageTaken(baseHP);
-                        CalculateDameDealt();
-                    }
-                    if (mob.MonsterHealth <= 0)
-                    {
-                        this.SendMessage = victoryString;
-                        this.BattleStarted = false;
-                        mob.MonsterDestroy();
-                        player.MonstersKilled++;
-                        return;
-                    }
+                    rounds++;
+                    CalculateDamageTaken();
+                    CalculateDameDealt();
                 }
 
-                if (baseHP <= 0)
+                if (MobBaseHP <= 0)
                 {
-                    this.SendMessage = defeatString;
+                    MobBaseHP = 0;
+                    this.SendMessage = victoryString;
+                    this.BattleStarted = false;                    
+                    player.MonstersKilled++;                    
+                    return;
+                }
+                else if (BaseHP <= 0)
+                {
+                    BaseHP = 0;
+                    this.SendMessage = defeatString;                    
+                    AverageDamageDealt = TotalDamageDealt / Rounds;
+                    AverageDamageTaken = TotalDamageTaken / Rounds;
                     this.BattleStarted = false;
+                    return;
                 }
             }
         }
 
-        public void CalculateDamageTaken(int baseHP)
+        public void CalculateDamageTaken()
         {
+            Player player = new Player();
+            Monster mob = new Monster();
             int mAttack = mob.MonsterAttack;
+
+            int flyHP;
 
             if (this.BattleStarted == true)
             {
                 mAttack -= player.Defence;
 
                 dmgTaken = mAttack; //
-
-                baseHP -= mAttack;
-
+                flyHP = BaseHP - mAttack;
+                BaseHP = flyHP;
                 DamageTaken = mAttack;
+                TotalDamageTaken = TotalDamageTaken + DamageTaken;
+            }
+            else
+            {
+                return;
             }
         }
 
         public void CalculateDameDealt()
         {
+            Player player = new Player();
+            Monster mob = new Monster();
             int pAttack = player.Attack;
+
+            int flyHP;            
             if (this.BattleStarted == true)
             {
                 pAttack -= mob.MonsterDefence;
                 dmgDealt = pAttack;
 
-                mobCurrentHP = mob.MonsterHealth;
+                flyHP = mobBaseHP - pAttack;
+                MobBaseHP = flyHP;
 
-                mobCurrentHP -= pAttack;
-                mob.MonsterHealth -= pAttack;
 
                 DamageDealt = pAttack;
+                TotalDamageDealt = TotalDamageDealt + DamageDealt;
             }
         }
 
@@ -118,6 +155,30 @@ namespace TXTGameOffWeb.Objects
             set { dmgDealt = value; }
         }
 
+        public int TotalDamageDealt
+        {
+            get { return damageDealt; }
+            set { damageDealt = value; }
+        }
+
+        public int TotalDamageTaken
+        {
+            get { return damageTaken; }
+            set { damageTaken = value; }
+        }
+
+        public int AverageDamageDealt
+        {
+            get { return avrgDmgDealt; }
+            set { avrgDmgDealt = value; }
+        }
+
+        public int AverageDamageTaken
+        {
+            get { return avrgDmgTaken; }
+            set { avrgDmgTaken = value; }
+        }
+
         public bool BattleEnd
         {
             get { return battleEnd; }
@@ -128,6 +189,41 @@ namespace TXTGameOffWeb.Objects
         {
             get { return battleStarted; }
             set { battleStarted = value; }
+        }
+
+        public int Rounds
+        {
+            get { return rounds; }
+            set { rounds = value; }
+        }
+
+        public int BaseHP
+        {
+            get { return baseHP; }
+            set { baseHP = value; }
+        }
+
+        public int MobBaseHP
+        {
+            get { return mobBaseHP; }
+            set { mobBaseHP = value; }
+        }
+
+        public void BattleDestroy()
+        {
+            SendMessage = "";
+            DamageTaken = 0;
+            DamageDealt = 0;
+            AverageDamageDealt = 0;
+            AverageDamageTaken = 0;
+            TotalDamageDealt = 0;
+            TotalDamageTaken = 0;
+            Rounds = 0;
+            BattleEnd = true;
+            BattleStarted = false;
+            BaseHP = 0;
+            MobBaseHP = 0;
+
         }
     }
 }

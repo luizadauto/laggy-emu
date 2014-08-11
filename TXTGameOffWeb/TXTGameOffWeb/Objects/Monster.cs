@@ -27,6 +27,14 @@ namespace TXTGameOffWeb.Objects
         private static int mMaxJade;
         private static int origMobHP;
 
+        private static int currentMonster;
+
+        public int CurrentMonster
+        {
+            get { return currentMonster; }
+            set { currentMonster = value; }
+        }
+
         public string MonsterName
         {
             get { return mName; }
@@ -125,28 +133,41 @@ namespace TXTGameOffWeb.Objects
 
         public void GetMonster(string monsterName)
         {
-            var data = File.ReadAllLines("MonsterInfo.txt")
-                    .Select(x => x.Split('='))
-                    .Where(x => x.Length > 1)
-                    .ToDictionary(x => x[0].Trim(), x => x[1]);
+            StreamReader reader = new StreamReader("MonsterInfo.txt");
 
-            this.MonsterName = data["Name"];
-            this.MonsterEndurance = Convert.ToInt16(data["Endurance"]);
-            this.MonsterHealth = this.MonsterEndurance * 5;
-            this.OrigMonsterHealth = this.MonsterHealth;
-            this.MonsterAttack = Convert.ToInt16(data["Attack"]);
-            this.MonsterDefence = Convert.ToInt16(data["Defence"]);
-            this.MonsterAccuracy = float.Parse(data["Accuracy"]);
-            this.MonsterEvasion = float.Parse(data["Evasion"]);
-            this.MonsterExperience = Convert.ToInt16(data["EXP"]);
-            this.MonsterPlatinum = Convert.ToInt16(data["Platinum"]);
-            this.MonsterGold = Convert.ToInt16(data["Gold"]);
-            this.MonsterSilver = Convert.ToInt16(data["Silver"]);
-            this.MonsterCopper = Convert.ToInt16(data["Copper"]);
-            this.MonsterTokens = Convert.ToInt16(data["Tokens"]);
-            this.MonsterMinJade = Convert.ToInt16(data["MinJade"]);
-            this.MonsterMaxJade = Convert.ToInt16(data["MaxJade"]);
-            data.Clear();
+            string s = reader.ReadLine();
+
+            while (s != null)
+            {
+                    char[] delimiter = { ':' };
+                    string[] fields = s.Split(delimiter);
+                    this.MonsterName = fields[0];
+                    this.MonsterEndurance = int.Parse(fields[1]);
+                    this.MonsterHealth = this.MonsterEndurance * 5;
+                    this.OrigMonsterHealth = this.MonsterHealth;
+                    this.MonsterAttack = int.Parse(fields[2]);
+                    this.MonsterDefence = int.Parse(fields[3]);
+                    this.MonsterAccuracy = float.Parse(fields[4]);
+                    this.MonsterEvasion = float.Parse(fields[5]);
+                    this.MonsterExperience = int.Parse(fields[6]);
+                    this.MonsterPlatinum = int.Parse(fields[7]);
+                    this.MonsterGold = int.Parse(fields[8]);
+                    this.MonsterSilver = int.Parse(fields[9]);
+                    this.MonsterCopper = int.Parse(fields[10]);
+                    this.MonsterTokens = int.Parse(fields[11]);
+                    this.MonsterMinJade = int.Parse(fields[12]);
+                    this.MonsterMaxJade = int.Parse(fields[13]);
+                    if (this.MonsterName == monsterName)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        s = reader.ReadLine();
+                    }                                
+            }
+            reader.Dispose();
+            reader.Close();            
         }
 
         public void MonsterDestroy()
