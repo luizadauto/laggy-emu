@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TXTGameOffWeb.Objects
 {
-    public class Monster : Player
+    public class Monster
     {
         private static string mName;
         private static int mEndurance;            

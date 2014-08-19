@@ -42,13 +42,12 @@ namespace TXTGameOffWeb
         {
             sMHPLbl.Text = mob.OrigMonsterHealth.ToString();
             sPHPLbl.Text = player.Health.ToString();
-            while (battle.BattleEnd == false)
+            if (battle.BattleEnd == true)
             {
                 if (battle.BaseHP >= 1 || battle.MobBaseHP >= 1)
                 {
                     if (battle.BaseHP >= 1 && battle.MobBaseHP <= 0)
                     {
-                        battle.BattleEnd = true;
                         sDefeatLBl.Text = recvMsg + " in " + battle.Rounds.ToString() + " rounds";
                         sDDealtAvrgLbl.Text = battle.AverageDamageDealt.ToString();
                         sDDealtLbl.Text = battle.TotalDamageDealt.ToString();
@@ -58,7 +57,6 @@ namespace TXTGameOffWeb
                     }
                     if (battle.BaseHP <= 0 && battle.MobBaseHP >= 1)
                     {
-                        battle.BattleEnd = true;
                         sDefeatLBl.Text = recvMsg + " in " + battle.Rounds.ToString() + " rounds";
                         sDDealtAvrgLbl.Text = battle.AverageDamageDealt.ToString();
                         sDDealtLbl.Text = battle.TotalDamageDealt.ToString();
@@ -308,9 +306,27 @@ namespace TXTGameOffWeb
 
             //Currencies
             sPlatLbl.Text = player.Platinum.ToString() + "p";
+
+            if (player.Gold >= 100)
+            {
+                player.Platinum++;
+                player.Gold -= 99;
+            }
             sGoldLbl.Text = player.Gold.ToString() + "g";
+            if (player.Silver >= 100)
+            {
+                player.Gold++;
+                player.Silver -= 99;
+            }
             sSilverLbl.Text = player.Silver.ToString() + "s";
+            if (player.Copper >= 100)
+            {
+                player.Silver++;
+                player.Copper -= 99;
+            }
             sCopperLbl.Text = player.Copper.ToString() + "c";
+            
+
             sJadeLbl.Text = player.Jade.ToString();
             sTokenLbl.Text = player.Tokens.ToString();
             sPTicketLbl.Text = player.PrizeTickets.ToString();            

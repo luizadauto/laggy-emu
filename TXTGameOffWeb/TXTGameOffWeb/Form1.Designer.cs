@@ -1244,7 +1244,7 @@
             // 
             this.autoRemainLbl.AutoSize = true;
             this.autoRemainLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoRemainLbl.Location = new System.Drawing.Point(24, 282);
+            this.autoRemainLbl.Location = new System.Drawing.Point(27, 282);
             this.autoRemainLbl.Name = "autoRemainLbl";
             this.autoRemainLbl.Size = new System.Drawing.Size(260, 20);
             this.autoRemainLbl.TabIndex = 20;
@@ -1355,7 +1355,7 @@
             // 
             this.sDodgeCritMissLbl.AutoSize = true;
             this.sDodgeCritMissLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sDodgeCritMissLbl.Location = new System.Drawing.Point(21, 165);
+            this.sDodgeCritMissLbl.Location = new System.Drawing.Point(27, 165);
             this.sDodgeCritMissLbl.Name = "sDodgeCritMissLbl";
             this.sDodgeCritMissLbl.Size = new System.Drawing.Size(375, 20);
             this.sDodgeCritMissLbl.TabIndex = 12;
@@ -1375,7 +1375,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(21, 134);
+            this.label4.Location = new System.Drawing.Point(27, 134);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(161, 20);
             this.label4.TabIndex = 11;

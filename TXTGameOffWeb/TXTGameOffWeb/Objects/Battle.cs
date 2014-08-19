@@ -18,7 +18,7 @@ namespace TXTGameOffWeb.Objects
      */
 
 
-    public class Battle : Player
+    public class Battle
     {
         private static int damageTaken;
         private static int damageDealt;
@@ -46,6 +46,7 @@ namespace TXTGameOffWeb.Objects
 
 
         Player player = new Player();
+        Dropper drop = new Dropper();
 
         public void BattleResult(string mobName)
         {            
@@ -74,8 +75,10 @@ namespace TXTGameOffWeb.Objects
 
                 if (MobBaseHP <= 0)
                 {
+                    drop.DropItem();
                     MobBaseHP = 0;
                     this.SendMessage = victoryString;
+                    this.BattleEnd = true;
                     this.BattleStarted = false;                    
                     player.MonstersKilled++;                    
                     return;
@@ -86,6 +89,7 @@ namespace TXTGameOffWeb.Objects
                     this.SendMessage = defeatString;                    
                     AverageDamageDealt = TotalDamageDealt / Rounds;
                     AverageDamageTaken = TotalDamageTaken / Rounds;
+                    this.BattleEnd = true;
                     this.BattleStarted = false;
                     return;
                 }
