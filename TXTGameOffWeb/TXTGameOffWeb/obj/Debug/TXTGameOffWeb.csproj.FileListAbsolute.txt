@@ -7,3 +7,7 @@ D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.Properties.Res
 D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.csproj.GenerateResource.Cache
 D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.exe
 D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.pdb
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\bin\Debug\TXTGameOffWeb.exe.manifest
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\bin\Debug\TXTGameOffWeb.application
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.exe.manifest
+D:\cSharp app\TXTGameOffWeb\TXTGameOffWeb\obj\Debug\TXTGameOffWeb.application

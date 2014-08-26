@@ -35,7 +35,10 @@ namespace TXTGameOffWeb
             bLogPanel.Visible = false;
             jewelPanel.Hide();
             jewelPanel.Visible = false;
-            LoadPlayer();
+            player.LoadPlayer();
+            quest.LoadPlayerQuest();
+            updateLblTimer.Start();
+            updateTimer.Start();
         }
 
         public void BattleState(string recvMsg)
@@ -191,99 +194,6 @@ namespace TXTGameOffWeb
             {
                 StartNewBattle();
             }
-        }
-
-        public void LoadPlayer()
-        {
-
-            var data = File.ReadAllLines("PlayerInfo.txt")
-                .Select(x => x.Split('='))
-                .Where(x => x.Length > 1)
-                .ToDictionary(x => x[0].Trim(), x => x[1]);
-            //[Player]
-            player.Name = data["Name"];
-            player.GuildName = data["Guild"];            
-            player.Rank = data["Rank"];
-            player.Level = Convert.ToInt16(data["Level"]);
-            player.Experience = Convert.ToInt16(data["EXP"]);
-            player.GuildLevel = Convert.ToInt16(data["GuildLvl"]);
-            player.Rep = Convert.ToInt16(data["Rep"]);
-
-            //[Stats]
-            player.Endurance = Convert.ToInt16(data["Endurance"]);
-            player.Health = player.Endurance * 5;
-            player.OrigPlayerHP = player.Health;
-            player.Attack = Convert.ToInt16(data["Attack"]);
-            player.Defence = Convert.ToInt16(data["Defence"]);
-            player.Accuracy = float.Parse(data["Accuracy"]);
-            player.Evasion = float.Parse(data["Evasion"]);
-
-            //[Currencies]
-            player.Platinum = Convert.ToInt16(data["Platinum"]);            
-            player.Gold = Convert.ToInt16(data["Gold"]);
-            player.Silver = Convert.ToInt16(data["Silver"]);
-            player.Copper = Convert.ToInt16(data["Copper"]);
-            player.Jade = Convert.ToInt16(data["Jade"]);
-            player.Tokens = Convert.ToInt16(data["Tokens"]);
-            player.PrizeTickets = Convert.ToInt16(data["Prize Tickets"]);
-            player.Diamonds = Convert.ToInt16(data["Diamonds"]);
-            player.Sapphires = Convert.ToInt16(data["Sapphires"]);
-            player.Rubies = Convert.ToInt16(data["Rubies"]);
-            player.Emeralds = Convert.ToInt16(data["Emeralds"]);
-            player.Opals = Convert.ToInt16(data["Opals"]);
-
-            //[Quests]
-            player.CurrentQuest = Convert.ToInt16(data["CurrentQuest"]);
-
-            player.QuestsCompleted = Convert.ToInt16(data["QComplete"]);
-            player.MonstersKilled = Convert.ToInt16(data["Mkills"]);
-            player.QuestAmount = Convert.ToInt16(data["QCount"]);
-            player.MaxQuestAmount = Convert.ToInt16(data["MaxCount"]);
-
-            //[Equipment]
-            player.Weapon1 = data["LeftHand"];
-            player.Weapon2 = data["RightHand"];
-            player.Head = data["Head"];
-
-            player.Hands = data["Gloves"];
-            player.Wrist = data["Wrist"];
-            player.Arm = data["Arm"];
-            player.ChestArmor = data["Chest"];
-            player.Legs = data["Legs"];
-            player.Feet = data["Feet"];
-            player.Necklace = data["Necklace"];
-            player.Ring1 = data["Ring1"];
-            player.Ring2 = data["Ring2"];
-            player.Ring3 = data["Ring3"];
-            player.Ring4 = data["Ring4"];
-            player.Brace1 = data["Brace1"];
-            player.Brace2 = data["Brace2"];
-//            trainer.SetDefaultNeedExp();
-            data.Clear();
-
-            LoadPlayerQuest();
-       
-            updateLblTimer.Start();
-            updateTimer.Start();
-        }
-
-
-        public void LoadPlayerQuest()
-        {
-            
-
-            var data = File.ReadAllLines("PlayerQuestInfo.txt")
-                .Select(x => x.Split('='))
-                .Where(x => x.Length > 1)
-                .ToDictionary(x => x[0].Trim(), x => x[1]);
-            //[Player]
-            quest.Name = data["Name"];
-            quest.GetCurrentQuest = Convert.ToInt16(data["QuestID"]);
-            quest.QuestType = Convert.ToInt16(data["QuestType"]);
-            quest.NumberOfKills = Convert.ToInt16(data["NoOfKills"]);
-            quest.NumberOfMobs = Convert.ToInt16(data["NoOfMobs"]);
-            quest.NumberOfDrops = Convert.ToInt16(data["NoOfDrops"]);
-            quest.NumberOfItems = Convert.ToInt16(data["NoOfItems"]);            
         }
 
         private void updateLblTimer_Tick(object sender, EventArgs e)

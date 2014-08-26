@@ -20,6 +20,21 @@ namespace TXTGameOffWeb.Objects
         private static string questString2 = "You have collected a ";
         private static string questString3 = "You currently do not have a quest";
 
+        public void LoadPlayerQuest()
+        {
+            var data = File.ReadAllLines("PlayerQuestInfo.txt")
+                .Select(x => x.Split('='))
+                .Where(x => x.Length > 1)
+                .ToDictionary(x => x[0].Trim(), x => x[1]);
+            //[Player]
+            this.Name = data["Name"];
+            this.GetCurrentQuest = Convert.ToInt16(data["QuestID"]);
+            this.QuestType = Convert.ToInt16(data["QuestType"]);
+            this.NumberOfKills = Convert.ToInt16(data["NoOfKills"]);
+            this.NumberOfMobs = Convert.ToInt16(data["NoOfMobs"]);
+            this.NumberOfDrops = Convert.ToInt16(data["NoOfDrops"]);
+            this.NumberOfItems = Convert.ToInt16(data["NoOfItems"]);   
+        }
 
         public string Name
         {

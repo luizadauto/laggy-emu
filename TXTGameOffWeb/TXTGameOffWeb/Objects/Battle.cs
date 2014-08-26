@@ -10,10 +10,10 @@ namespace TXTGameOffWeb.Objects
      * 
      *              TO DO 
      *              
-     *              Calculations of Accuracy, Attack vs Defence, Evasion and Health taken and dealt
+     *              Calculations of Accuracy, Evasion and Health
      *              Experience table for player in order for the player to increase level | PlayerExp.txt
      *              Drop event (Random drops & Quest drops | Dropper)
-     *              Health, Attack, Defence, Accuracy and Evasion training (May add it's own class | Training.cs)              
+     *              Health, Attack, Defence, Accuracy and Evasion training (May add it's own class | Trainer.cs)              
      * 
      */
 

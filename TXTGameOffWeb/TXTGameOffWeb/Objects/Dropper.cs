@@ -23,7 +23,6 @@ namespace TXTGameOffWeb.Objects
             player.Tokens += mob.MonsterTokens;
 
             player.Jade += rand.Next(mob.MonsterMinJade, mob.MonsterMaxJade);
-
         }
     }
 }

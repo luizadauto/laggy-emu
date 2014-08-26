@@ -364,6 +364,76 @@ namespace TXTGameOffWeb.Objects
 
         #endregion
 
+
+        public void LoadPlayer()
+        {
+
+            var data = File.ReadAllLines("PlayerInfo.txt")
+                .Select(x => x.Split('='))
+                .Where(x => x.Length > 1)
+                .ToDictionary(x => x[0].Trim(), x => x[1]);
+            //[Player]
+            this.Name = data["Name"];
+            this.GuildName = data["Guild"];
+            this.Rank = data["Rank"];
+            this.Level = Convert.ToInt16(data["Level"]);
+            this.Experience = Convert.ToInt16(data["EXP"]);
+            this.GuildLevel = Convert.ToInt16(data["GuildLvl"]);
+            this.Rep = Convert.ToInt16(data["Rep"]);
+
+            //[Stats]
+            this.Endurance = Convert.ToInt16(data["Endurance"]);
+            this.Health = this.Endurance * 5;
+            this.OrigPlayerHP = this.Health;
+            this.Attack = Convert.ToInt16(data["Attack"]);
+            this.Defence = Convert.ToInt16(data["Defence"]);
+            this.Accuracy = float.Parse(data["Accuracy"]);
+            this.Evasion = float.Parse(data["Evasion"]);
+
+            //[Currencies]
+            this.Platinum = Convert.ToInt16(data["Platinum"]);
+            this.Gold = Convert.ToInt16(data["Gold"]);
+            this.Silver = Convert.ToInt16(data["Silver"]);
+            this.Copper = Convert.ToInt16(data["Copper"]);
+            this.Jade = Convert.ToInt16(data["Jade"]);
+            this.Tokens = Convert.ToInt16(data["Tokens"]);
+            this.PrizeTickets = Convert.ToInt16(data["Prize Tickets"]);
+            this.Diamonds = Convert.ToInt16(data["Diamonds"]);
+            this.Sapphires = Convert.ToInt16(data["Sapphires"]);
+            this.Rubies = Convert.ToInt16(data["Rubies"]);
+            this.Emeralds = Convert.ToInt16(data["Emeralds"]);
+            this.Opals = Convert.ToInt16(data["Opals"]);
+
+            //[Quests]
+            this.CurrentQuest = Convert.ToInt16(data["CurrentQuest"]);
+
+            this.QuestsCompleted = Convert.ToInt16(data["QComplete"]);
+            this.MonstersKilled = Convert.ToInt16(data["Mkills"]);
+            this.QuestAmount = Convert.ToInt16(data["QCount"]);
+            this.MaxQuestAmount = Convert.ToInt16(data["MaxCount"]);
+
+            //[Equipment]
+            this.Weapon1 = data["LeftHand"];
+            this.Weapon2 = data["RightHand"];
+            this.Head = data["Head"];
+
+            this.Hands = data["Gloves"];
+            this.Wrist = data["Wrist"];
+            this.Arm = data["Arm"];
+            this.ChestArmor = data["Chest"];
+            this.Legs = data["Legs"];
+            this.Feet = data["Feet"];
+            this.Necklace = data["Necklace"];
+            this.Ring1 = data["Ring1"];
+            this.Ring2 = data["Ring2"];
+            this.Ring3 = data["Ring3"];
+            this.Ring4 = data["Ring4"];
+            this.Brace1 = data["Brace1"];
+            this.Brace2 = data["Brace2"];
+            //            trainer.SetDefaultNeedExp();
+            data.Clear();
+        }
+
         public void PlayerDestroy()
         {
             this.Name = "";
