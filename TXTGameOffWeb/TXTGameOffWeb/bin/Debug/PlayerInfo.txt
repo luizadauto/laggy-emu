@@ -17,8 +17,8 @@ Evasion =0.1
 Platinum =0
 Gold =0
 Silver =5
-Copper =8
-Jade =144
+Copper =10
+Jade =145
 Tokens =0
 Prize Tickets =0
 Diamonds =0
@@ -29,7 +29,7 @@ Opals =0
 [Quests]
 CurrentQuest =0
 QComplete =0
-Mkills =184
+Mkills =185
 QCount =0
 MaxCount =0
 [Equipment]
